@@ -1,6 +1,6 @@
 package com.greatmap.arc.ioc;
 
-import org.springframework.stereotype.Repository;
+import lombok.Data;
 
 /**
  * Company: 武汉天耀宏图科技有限公司
@@ -9,8 +9,9 @@ import org.springframework.stereotype.Repository;
  * Author 陈凯红 chenkaihong@greatemap.com.cn
  * Description
  **/
-public interface PersonDao {
+@Data
+public class Person {
 
-    void add();
+    private String name;
 
 }

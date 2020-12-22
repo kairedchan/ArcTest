@@ -1,7 +1,5 @@
 package com.greatmap.arc.ioc;
 
-import org.springframework.stereotype.Repository;
-
 /**
  * Company: 武汉天耀宏图科技有限公司
  * Project name: ArcTest
@@ -9,8 +7,9 @@ import org.springframework.stereotype.Repository;
  * Author 陈凯红 chenkaihong@greatemap.com.cn
  * Description
  **/
-public interface PersonDao {
+public class MyBeanFactory {
 
-    void add();
-
+    public static Person createBean() {
+        return new Person();
+    }
 }

@@ -1,16 +1,17 @@
-package com.greatmap.arc.ioc;
-
-import org.springframework.stereotype.Repository;
+package com.greatmap.arc.annotation;
 
 /**
  * Company: 武汉天耀宏图科技有限公司
  * Project name: ArcTest
  * Create Time: 2020-12-22
- * Author 陈凯红 chenkaihong@greatemap.com.cn
+ *
+ * @author 陈凯红 chenkaihong@greatemap.com.cn
  * Description
  **/
 public interface PersonDao {
 
+    /**
+     * 测试
+     */
     void add();
-
 }
