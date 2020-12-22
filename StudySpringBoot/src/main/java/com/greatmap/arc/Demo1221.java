@@ -1,5 +1,7 @@
 package com.greatmap.arc;
 
+import org.springframework.beans.factory.BeanFactory;
+
 /**
  * Company: 武汉天耀宏图科技有限公司
  * Project name: ArcTest
