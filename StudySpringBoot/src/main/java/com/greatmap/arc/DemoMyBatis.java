@@ -1,13 +1,14 @@
 package com.greatmap.arc;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
+@MapperScan("com.greatmap.arc.mapper")
 public class DemoMyBatis {
 
     public static void main(String[] args) {
-
+        SpringApplication.run(DemoMyBatis.class, args);
     }
 }
