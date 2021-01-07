@@ -1,7 +1,10 @@
 package com.greatmap.arc.simple;
 
-import com.greatmap.arc.entity.Student;
-import com.greatmap.arc.mapper.StudentMapper;
+import com.greatmap.arc.entity.TDataChange;
+import com.greatmap.arc.entity.TDataTableName;
+import com.greatmap.arc.mapper.bak.TResultStrMapper;
+import com.greatmap.arc.mapper.recode.TDataChangeMapper;
+import com.greatmap.arc.mapper.recode.TDataTableNameMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,14 +14,25 @@ import java.util.List;
 @SpringBootTest
 public class SampleTest {
 
-    @Autowired
-    private StudentMapper studentMapper;
+//    @Autowired
+    TDataChangeMapper tDataChangeMapper;
 
+    @Autowired
+    TResultStrMapper tResultStrMapper;
+
+    @Autowired
+    TDataTableNameMapper tDataTableNameMapper;
+    
     @Test
     public void testSelect() {
-        System.out.println("--查询--");
-        List<Student> students = studentMapper.selectList(null);
-        students.forEach(student -> System.out.println(student.toString()));
+        List<String> tResultStrs = tResultStrMapper.getTableName();
+        
+        System.out.println(tResultStrs.toString());
+
+//        System.out.println(tDataChangeMapper.selectList(null));
+        
+        System.out.println(tDataTableNameMapper.getAllDate());
+//        List<TDataChange> tDataChanges = tDataChangeMapper.selectList(null);
     }
 
 }
