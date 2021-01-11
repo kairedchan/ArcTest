@@ -40,6 +40,6 @@ public class TableServiceImpl extends ServiceImpl<TableMapper, ResultData> imple
 
     @Override
     public List<String> getAllCTID(String tableName) {
-        return getAllCTID(tableName);
+        return baseMapper.getAllCTID(tableName);
     }
 }
