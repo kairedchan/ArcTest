@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.greatmap.arc.mapper.recode.TableMapper">
+
+    <select id="getAllCTID" resultType="java.lang.String">
+        select data from ${tableName};
+    </select>
+
+    <insert id="createTable">
+         create table if not exists ${tableName}
+            (
+                id bigserial,
+                data varchar(20)
+            );
+    </insert>
+
+    <delete id="removeTable">
+        drop table ${tableName};
+    </delete>
+
+    <insert id="insertCTID" parameterType="java.util.List">
+        insert into ${tableName} (data)
+        values
+            <foreach collection="ctids" item="item" separator=",">
+                (#{item})
+            </foreach>
+    </insert>
+
+    <delete id="removeCTID">
+        delete from ${tableName}
+        where data in
+        <foreach collection="ctids" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+</mapper>

@@ -1,3 +1,4 @@
+
 spring:
   jpa:
     show-sql: true
@@ -12,3 +13,5 @@ spring:
       username: gmcloud
       password: gmcloud
       driver-class-name: org.postgresql.Driver
+server:
+  port: 10003
