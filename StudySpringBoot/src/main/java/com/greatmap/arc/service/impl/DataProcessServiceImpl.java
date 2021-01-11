@@ -8,6 +8,7 @@ import com.greatmap.arc.mapper.recode.TableMapper;
 import com.greatmap.arc.service.IDataChangeService;
 import com.greatmap.arc.service.IDataProcessService;
 import com.greatmap.arc.service.IDataTableNameService;
+import com.greatmap.arc.service.ITableService;
 import com.greatmap.arc.simple.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,7 +42,7 @@ public class DataProcessServiceImpl implements IDataProcessService {
     IDataChangeService dataChangeService;
 
     @Autowired
-    TableMapper tableMapper;
+    ITableService tableService;
 
     @Override
     public List<String> getBakAllTableName() {
@@ -96,7 +97,7 @@ public class DataProcessServiceImpl implements IDataProcessService {
     @Override
     public boolean dropTable(List<String> tableNames) {
         tableNames.forEach(tableName -> {
-            tableMapper.removeTable(tableName);
+            tableService.removeTable(tableName);
         });
         return true;
     }
@@ -105,7 +106,7 @@ public class DataProcessServiceImpl implements IDataProcessService {
     public boolean createTable(List<String> tableNames) {
         boolean result = true;
         for (String tableName : tableNames) {
-            result = tableMapper.createTable(tableName) && result;
+            result = tableService.createTable(tableName) && result;
         }
         return result;
     }
@@ -117,19 +118,19 @@ public class DataProcessServiceImpl implements IDataProcessService {
 
     @Override
     public List<String> getRecodeTableData(String tableName) {
-        return tableMapper.getAllCTID(tableName);
+        return tableService.getAllCTID(tableName);
     }
 
     @Override
     public boolean removeTableData(String tableName, List<String> datas) {
         if (datas.size() == 0) return true;
-        return tableMapper.removeCTID(datas, tableName);
+        return tableService.removeCTID(datas, tableName);
     }
 
     @Override
     public boolean createTableData(String tableName, List<String> datas) {
         if (datas.size() == 0) return true;
         List<ResultData> collect = datas.stream().map(data -> new ResultData(Constant.getUUID(), data)).collect(Collectors.toList());
-        return tableMapper.insertCTID(collect, tableName);
+        return tableService.insertCTID(collect, tableName);
     }
 }

@@ -14,7 +14,7 @@ import java.util.List;
  * @author 陈凯红 chenkaihong@greatemap.com.cn
  * Description  用来进行表的新增, 删除, 插入 等综合操作
  **/
-public interface TableMapper extends BaseMapper {
+public interface TableMapper extends BaseMapper<ResultData> {
 
     /**
      * 创建表
