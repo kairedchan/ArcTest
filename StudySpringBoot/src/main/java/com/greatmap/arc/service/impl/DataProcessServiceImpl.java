@@ -2,6 +2,7 @@ package com.greatmap.arc.service.impl;
 
 import com.greatmap.arc.entity.DataChange;
 import com.greatmap.arc.entity.DataTableName;
+import com.greatmap.arc.entity.ResultData;
 import com.greatmap.arc.mapper.bak.TResultStrMapper;
 import com.greatmap.arc.mapper.recode.TableMapper;
 import com.greatmap.arc.service.IDataChangeService;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
@@ -79,20 +81,24 @@ public class DataProcessServiceImpl implements IDataProcessService {
         priDataChanges.addAll(datas);
 
         if (fastFlush || priDataChanges.size() >= Constant.INSERT_SIZE) {
-            result = dataChangeService.saveBatch(priDataChanges);
-            priDataChanges.clear();
+            result = flush();
         }
         return result;
     }
 
     @Override
     public boolean flush() {
-        return dataChangeService.saveBatch(priDataChanges);
+        boolean b = dataChangeService.saveBatch(priDataChanges);
+        priDataChanges.clear();
+        return b;
     }
 
     @Override
     public boolean dropTable(List<String> tableNames) {
-        return dataTableNameService.removeByTableNames(tableNames);
+        tableNames.forEach(tableName -> {
+            tableMapper.removeTable(tableName);
+        });
+        return true;
     }
 
     @Override
@@ -123,6 +129,7 @@ public class DataProcessServiceImpl implements IDataProcessService {
     @Override
     public boolean createTableData(String tableName, List<String> datas) {
         if (datas.size() == 0) return true;
-        return tableMapper.insertCTID(datas, tableName);
+        List<ResultData> collect = datas.stream().map(data -> new ResultData(Constant.getUUID(), data)).collect(Collectors.toList());
+        return tableMapper.insertCTID(collect, tableName);
     }
 }

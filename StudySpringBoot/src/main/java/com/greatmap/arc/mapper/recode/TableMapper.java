@@ -1,6 +1,7 @@
 package com.greatmap.arc.mapper.recode;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.greatmap.arc.entity.ResultData;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -31,14 +32,14 @@ public interface TableMapper extends BaseMapper {
 
     /**
      * 批量插入数据
-     * @param ctid
+     * @param ctids
      * @return
      */
-    boolean insertCTID(@Param("ctids") List<String> ctids, @Param("tableName") String tableName);
+    boolean insertCTID(@Param("ctids") List<ResultData> ctids, @Param("tableName") String tableName);
 
     /**
      * 移除数据
-     * @param ctid
+     * @param ctids
      * @param tableName
      * @return
      */

@@ -9,7 +9,7 @@
     <insert id="createTable">
          create table if not exists ${tableName}
             (
-                id bigserial,
+                id varchar(32),
                 data varchar(20)
             );
     </insert>
@@ -19,10 +19,10 @@
     </delete>
 
     <insert id="insertCTID" parameterType="java.util.List">
-        insert into ${tableName} (data)
+        insert into ${tableName} (id, data)
         values
             <foreach collection="ctids" item="item" separator=",">
-                (#{item})
+                (#{item.id}, #{item.data})
             </foreach>
     </insert>
 

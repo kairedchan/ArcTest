@@ -1,5 +1,7 @@
 package com.greatmap.arc.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import lombok.Data;
@@ -20,7 +22,10 @@ public class DataTableName implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public DataTableName(Long id, String tableName) {
+    public DataTableName() {
+    }
+
+    public DataTableName(String id, String tableName) {
         this.id = id;
         this.tableName = tableName;
     }
@@ -28,7 +33,8 @@ public class DataTableName implements Serializable {
     /**
      * 主键
      */
-    private Long id;
+    @TableId(value = "id", type = IdType.UUID)
+    private String id;
 
     /**
      * 表的名称

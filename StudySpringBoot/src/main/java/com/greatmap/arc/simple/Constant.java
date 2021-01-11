@@ -3,6 +3,7 @@ package com.greatmap.arc.simple;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Company: 武汉天耀宏图科技有限公司
@@ -25,6 +26,10 @@ public class Constant {
     
     static {
         PGTABLE_NAME = Arrays.asList(pgTableNameStr.split(","));
+    }
+
+    public static String getUUID() {
+        return UUID.randomUUID().toString().replace("-", "");
     }
     
 }

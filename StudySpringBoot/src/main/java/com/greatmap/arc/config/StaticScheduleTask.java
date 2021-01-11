@@ -60,6 +60,7 @@ public class StaticScheduleTask {
 
         // 提交所有数据
         dataProcessService.flush();
+        System.out.println("定时任务执行完毕");
     }
 
     private List<String> processTable() {

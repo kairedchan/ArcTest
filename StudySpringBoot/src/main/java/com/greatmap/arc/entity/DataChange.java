@@ -1,5 +1,7 @@
 package com.greatmap.arc.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.time.LocalDateTime;
 import java.io.Serializable;
@@ -21,7 +23,10 @@ public class DataChange implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public DataChange(Long id, Integer changeType, String tableName, String dataCtid, LocalDateTime changeDate) {
+    public DataChange() {
+    }
+
+    public DataChange(String id, Integer changeType, String tableName, String dataCtid, LocalDateTime changeDate) {
         this.id = id;
         this.changeType = changeType;
         this.tableName = tableName;
@@ -32,7 +37,8 @@ public class DataChange implements Serializable {
     /**
      * 数据的主键
      */
-    private Long id;
+    @TableId(value = "id", type = IdType.UUID)
+    private String id;
 
     /**
      * 数据的修改类型: 1为删除, 2为新增
