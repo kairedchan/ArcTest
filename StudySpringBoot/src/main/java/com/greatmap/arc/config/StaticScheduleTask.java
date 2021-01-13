@@ -37,7 +37,12 @@ public class StaticScheduleTask {
         // ====================== 数据级别的记录修改==============================
         allTableName.forEach(tableName -> {
             List<String> recodeTableData = dataProcessService.getRecodeTableData(tableName);
-            List<String> bakTableData = dataProcessService.getBakTableData(tableName);
+            List<String> bakTableData;
+            try {
+                bakTableData = dataProcessService.getBakTableData(tableName.replaceFirst("_", "."));
+            } catch (Exception e) {
+                return;
+            }
             List<String> temp = new ArrayList<>();
             temp.addAll(recodeTableData);
 
@@ -68,7 +73,7 @@ public class StaticScheduleTask {
         List<String> recodeTableNames = dataProcessService.getRecodeTableNames();
 
         // 去掉系统表
-        bakAllTableName.removeAll(Constant.PGTABLE_NAME);
+//        bakAllTableName.removeAll(Constant.PGTABLE_NAME);
 
         List<String> temp = new ArrayList<>();
         List<String> allTableName = new ArrayList<>();

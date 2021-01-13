@@ -3,11 +3,17 @@
 <mapper namespace="com.greatmap.arc.mapper.bak.TResultStrMapper">
 
     <select id="getAllTableName" resultType="java.lang.String">
-        select relname from pg_class where relkind = 'r'
+        select concat(table_schema, '_', table_name)
+        from information_schema.tables where table_schema not in ('pg_catalog', 'information_schema');
     </select>
 
     <select id="getAllCTID" resultType="java.lang.String">
         SELECT CTID FROM ${tableName}
     </select>
+
+    <select id="getAllSrid" resultType="java.lang.String">
+        SELECT SRID FROM ${tableName}
+    </select>
+
 
 </mapper>

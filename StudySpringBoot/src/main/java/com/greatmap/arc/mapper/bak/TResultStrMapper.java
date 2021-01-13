@@ -30,4 +30,11 @@ public interface TResultStrMapper extends BaseMapper<String> {
      */
     List<String> getAllCTID(@Param("tableName") String tableName);
 
+    /**
+     * 获取控件数据的SRID
+     * @param tableName
+     * @return
+     */
+    List<String> getAllSrid(@Param("tableName") String tableName);
+
 }

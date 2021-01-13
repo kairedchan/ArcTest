@@ -113,7 +113,11 @@ public class DataProcessServiceImpl implements IDataProcessService {
 
     @Override
     public List<String> getBakTableData(String tableName) {
-        return tResultStrMapper.getAllCTID(tableName);
+        try {
+            return tResultStrMapper.getAllCTID(tableName);
+        } catch (Exception e) {
+            return tResultStrMapper.getAllSrid(tableName);
+        }
     }
 
     @Override
